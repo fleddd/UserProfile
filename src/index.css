@@ -10,8 +10,9 @@
 }
 
 .activeNav{
-  background-color: rgb(59 130 246);
+  background-color: transparent;
   color: white;
+  border: 2px solid white;
 }
 
 .hidden{
@@ -31,4 +32,13 @@ input{
 }
 .error{
   color: red;
+}
+.MuiDataGrid-toolbarContainer{
+  flex-direction: row-reverse;
+}
+.css-128fb87-MuiDataGrid-toolbarContainer{
+  padding: 20px;
+}
+.css-wop1k0-MuiDataGrid-footerContainer {
+ justify-content: center;
 }

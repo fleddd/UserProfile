@@ -7,10 +7,10 @@ const Dashboard = () => {
     useEffect(() => {
         getUsers()
     }, [])
-    const workers = users.reduce((total, currentUsers) => currentUsers.data.role === 'Worker' ? total + 1 : total, 0)
-    const managers = users.reduce((total, currentUsers) => currentUsers.data.role === 'Manager' ? total + 1 : total, 0)
-    const ceo = users.reduce((total, currentUsers) => currentUsers.data.role === 'C-Level' ? total + 1 : total, 0)
-    const staffs = users.reduce((total, currentUsers) => currentUsers.data.role === 'Staff' ? total + 1 : total, 0)
+    const workers = users.reduce((total, currentUsers) => currentUsers.role === 'Worker' ? total + 1 : total, 0)
+    const managers = users.reduce((total, currentUsers) => currentUsers.role === 'Manager' ? total + 1 : total, 0)
+    const ceo = users.reduce((total, currentUsers) => currentUsers.role === 'C-Level' ? total + 1 : total, 0)
+    const staffs = users.reduce((total, currentUsers) => currentUsers.role === 'Staff' ? total + 1 : total, 0)
     return (
         <>
             {isLoading ? 

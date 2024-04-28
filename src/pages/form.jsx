@@ -1,10 +1,8 @@
 // TODO:
 //  - validation of editing
-//  - fix router bug
-//  - pagination
-//  - filtration
 //  - auth
 //  - admin mode / user mode
+//  - implement react-query for better performance of fetches
 
 import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
@@ -28,7 +26,7 @@ function Form() {
 
     function onSubmit(data){
         // send data
-        addDoc(usersCollectionRef, {data, image}).then(() => {
+        addDoc(usersCollectionRef, {...data, image}).then(() => {
             succesRef.current.className = 'mb-5 text-center text-xl text-green-500'
             setTimeout(() => {
                 succesRef.current.className = 'hidden'
@@ -48,9 +46,6 @@ function Form() {
         setCroppedImage('')
         reset()
     }
-    console.log(succesRef);
-    console.log(errors);
-
     return ( 
         <main className="flex justify-center items-center flex-col">
             <p ref={succesRef} className='hidden'>Employee was successfully added to database!</p>            

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import ReactCrop, { centerCrop, convertToPixelCrop, makeAspectCrop } from 'react-image-crop';
 
 import Button from './button'
+
 import { faUpload} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -126,7 +127,7 @@ library.add(faUpload)
     return (
         <>
             
-            <div className={`${image ? 'hidden' : ''} w-[300px] cursor-pointer h-[200px] border-dashed hover:border-yellow-500 transition-all ease-in-out border-blue-500 border-2 rounded-md p- flex flex-col gap-2 justify-center tems-center`} onClick={handleOnSelect}>
+            <div className={`${image ? 'hidden' : ''} w-[300px] mt-5 cursor-pointer h-[200px] border-dashed hover:border-yellow-500 transition-all ease-in-out border-blue-500 border-2 rounded-md p- flex flex-col gap-2 justify-center tems-center`} onClick={handleOnSelect}>
                 <FontAwesomeIcon icon="upload" size='2xl' />
             </div>
 
@@ -200,7 +201,7 @@ library.add(faUpload)
                       
                        <canvas  
                             ref={canvasRef}
-                            className='hidden w-[150px] h-[150px]'
+                            className='hidden'
                        />
                        
                     

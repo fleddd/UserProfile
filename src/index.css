@@ -42,3 +42,6 @@ input{
 .css-wop1k0-MuiDataGrid-footerContainer {
  justify-content: center;
 }
+.activeMenu{
+  transform: translateX(0);
+}

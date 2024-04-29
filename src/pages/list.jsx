@@ -7,7 +7,7 @@ import useGetUsers from "../hooks/useGetUsers";
 import { useEffect, useState, useCallback } from "react";
 import { deleteDoc, doc,  } from "firebase/firestore";
 import {db} from '../firebase-config'
-
+import { motion } from 'framer-motion';
 const List = () => {
     const {getUsers, users, isLoading} = useGetUsers()
     useEffect(() => {
@@ -64,7 +64,17 @@ const List = () => {
       ]
 
     return (
-        <>
+        <motion.main initial={{
+            opacity: 0,
+            y: -10
+        }}
+        animate={{
+            opacity:1,
+            y: 0,
+            transition: {
+                duration: 0.7
+            }
+        }}>
         <DataGrid
                 sx={{
                     alignItems: 'center',
@@ -97,11 +107,11 @@ const List = () => {
                 }}
                  rows={users}
                  columns={columns}
-
+                
                 />
         
         
-        </>
+        </motion.main>
     );
 }
  

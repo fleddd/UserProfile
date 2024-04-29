@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useGetUsers from "../hooks/useGetUsers";
 import Button from "../components/button";
+import { motion } from "framer-motion";
 const Dashboard = () => {
 
     const {setUsers, getUsers, users, isLoading} = useGetUsers()
@@ -18,7 +19,17 @@ const Dashboard = () => {
                     Loading...
                 </div>
                     :
-                <main className="flex  flex-col h-full items-center justify-center">
+                <motion.main initial={{
+                    opacity: 0,
+                    y: -10
+                }}
+                animate={{
+                    opacity:1,
+                    y: 0,
+                    transition: {
+                        duration: 0.7
+                    }
+                }} className="flex  flex-col h-full items-center justify-center">
                     <div className="text-center grid xs:grid-cols-1 lg:grid-cols-2 items-center gap-10">
                         <div className="w-[400px] h-[150px] border-2 border-blue-500 bg-blue-400 rounded-xl text-white">
                             <div className="flex gap-3 justify-center items-center h-full">
@@ -62,7 +73,7 @@ const Dashboard = () => {
                             
                                 
                                 
-                </main>
+                </motion.main>
             }
             
         </>

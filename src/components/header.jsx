@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {useState} from 'react';
 import { motion } from "framer-motion";
 import HeaderModal from './headerModal';
-import BlurDrop from './BlurDrop';
 
 library.add(faBars)
 function Header() {
@@ -31,9 +30,9 @@ function Header() {
                             <FontAwesomeIcon icon={faBars} className='text-4xl text-white p-2 border-2 rounded-3xl'/>
                         </motion.div>
                         <nav className='hidden h-full sm:flex justify-center gap-3 items-center sm:text-md md:text-xl font-bold'>
-                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl ${routerPath.pathname === '/' && 'activeNav'}`} to={'/'}>Dashboard</NavLink>
-                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl ${routerPath.pathname === '/form' && 'activeNav'}`} to={'/form'}>Add</NavLink>
-                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl ${routerPath.pathname === '/list'  && 'activeNav'}`} to={'/list'}>List</NavLink>
+                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === '/' && 'activeNav'}`} to={'/'}>Dashboard</NavLink>
+                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === '/form' && 'activeNav'}`} to={'/form'}>Add</NavLink>
+                            <NavLink className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === '/list'  && 'activeNav'}`} to={'/list'}>List</NavLink>
                         </nav>
                         
                        

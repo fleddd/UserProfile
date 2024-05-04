@@ -26,22 +26,60 @@
 body{
   padding-bottom: 50px;
 }
-input{
-  overflow-wrap: break-word;
-        word-wrap: break-word;
-}
 .error{
   color: red;
 }
 .MuiDataGrid-toolbarContainer{
   flex-direction: row-reverse;
 }
-.css-128fb87-MuiDataGrid-toolbarContainer{
-  padding: 20px;
-}
 .css-wop1k0-MuiDataGrid-footerContainer {
  justify-content: center;
 }
 .activeMenu{
   transform: translateX(0);
+}
+.GridColDef {
+  display: flex;
+  flex: 1;
+}
+.MuiDataGrid-cellEmpty{
+  display: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+.MuiDataGrid-filler{
+  display: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+.css-yrdy0g-MuiDataGrid-columnHeaderRow{
+  width: fit-content;
+}
+.MuiDataGrid-row{
+  width: 100%;
+}
+.MuiDataGrid-row--firstVisible{
+  width: 100%;
+}
+.MuiDataGrid-row--firstVisible{
+  display: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
+.MuiDataGrid-columnHeaderTitleContainer{
+  justify-content: center;
+}
+@media (max-width: 760px) {
+  .MuiDataGrid-main{
+    width: 100%;
+  } 
 }

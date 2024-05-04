@@ -2,42 +2,52 @@
 //  - validation of editing
 //  - auth
 //  - admin mode / user mode
-//  - implement react-query for better ppperformance of fetches
+//  - implement react-query for better performance of fetches
 
-import React, { useState, useRef, Suspense  } from 'react';
+import React, { useState, useRef  } from 'react';
 import { useForm } from 'react-hook-form';
 
 import UploadImage from '../components/UploadImage';
 import { addDoc, collection} from 'firebase/firestore';
-import {db} from './../firebase-config'
+import {db} from '../firebase-config'
 import 'react-image-crop/dist/ReactCrop.css'
 import { motion } from "framer-motion";
+import InputForm from '../components/InputForm';
+import { formSchema } from '../utils/formSchema';
+import {zodResolver} from '@hookform/resolvers/zod'
+import {toast } from 'react-toastify';
+
+
 
 function Form() {
     const usersCollectionRef = collection(db, "users")
     const [image, setImage] = useState('')
-    const succesRef = useRef(null)
     const [croppedImage, setCroppedImage] = useState('')  
     const {
         register,
         handleSubmit,
         reset,
-        formState: {errors}
-    } = useForm({})
+        formState: {errors, isValid},
+
+    } = useForm({
+        defaultValues: {
+            firstName: '',
+            middleName: '',
+            lastName: ''
+        },
+        resolver: zodResolver(formSchema)
+    })
 
     function onSubmit(data){
         // send data
         addDoc(usersCollectionRef, {...data, image}).then(() => {
-            succesRef.current.className = 'mb-5 text-center text-xl text-green-500'
-            setTimeout(() => {
-                succesRef.current.className = 'hidden'
-            },3000)
+            toast.success('The user was successfuly added to database!', {
+                position: 'top-center'
+            })
         }).catch(() => {
-            succesRef.current.innerText = "Data wasn't sent to the database. Something went wrong."
-            succesRef.current.className = 'mb-5 text-center text-xl text-red-500 transition-all ease-in'
-            setTimeout(() => {
-                succesRef.current.className = 'hidden'
-            },3000)
+            toast.error('Something went wrong...', {
+                position: 'top-center'
+            })
         })
 
        
@@ -49,11 +59,10 @@ function Form() {
     }
     return ( 
         <main className="flex justify-center items-center flex-col">
-            <Suspense fallback={<div>Loading...</div>}>
+        
 
 
-                
-                        <p ref={succesRef} className='hidden'>Employee was successfully added to database!</p>            
+            
                         <motion.form initial={{
                                     opacity: 0,
                                     y: -10
@@ -64,74 +73,36 @@ function Form() {
                                     transition: {
                                         duration: 0.7
                                     }
-                                }} action="" className="flex flex-col justify-start items-start  " onSubmit={handleSubmit(onSubmit)}>
+                                }} action="" className="flex flex-col justify-start items-start max-w-[300px] " onSubmit={handleSubmit(onSubmit)}>
                             
                                 <div className='flex flex-col gap-3'>
-                                <input
-                                {...register('firstName', {
-                                    required: {
-                                        value: true,
-                                        message: "This field is required!"
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Zа-яА-Я\s]*$/,
-                                        message: 'This field must contain only string symbols!'
-                                    },
-                                    maxLength: {
-                                        value: 25,
-                                        message: 'This field must be no longer than 25 symbols!'
-                                    }
-                                })} type="text" placeholder="First name" className={`border-2 ${errors.firstName ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}/>
-                                <span className='error'>{errors.firstName?.message}</span>
-                                <input {...register('middleName', {
-                                    pattern: {
-                                        value: /^[a-zA-Zа-яА-Я\s]*$/,
-                                        message: 'This field must contain only string symbols!'
-                                    },
-                                    maxLength: {
-                                        value: 25,
-                                        message: 'This field must be no longer than 25 symbols!'
-                                    }
-                                })} type="text" placeholder="Middle name" className={`border-2 ${errors.middleName ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}/>
-                                <span className='error'>{errors.middleName?.message}</span>
-                                <input {...register('lastName', {
-                                    required: {
-                                        value: true,
-                                        message: "This field is required!"
-                                    },
-                                    pattern: {
-                                        value: /^[a-zA-Zа-яА-Я\s]*$/,
-                                        message: 'This field must contain only string symbols!'
-                                    },
-                                    maxLength: {
-                                        value: 25,
-                                        message: 'This field must be no longer than 25 symbols!'
-                                    }
-                                })} type="text" placeholder="Last name" className={`border-2 ${errors.lastName ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}/>
-                                <span className='error'>{errors.lastName?.message}</span>
-                                
+                                    <InputForm 
+                                        label={'First Name'}
+                                        {...register('firstName')}
+                                        errorMessage={errors?.firstName?.message}
+                                    />
+                                    <InputForm 
+                                            label={'Middle Name'}
+                                            {...register('middleName')}
+                                            errorMessage={errors?.middleName?.message}
+                                    />
+                                    <InputForm 
+                                            label={'Last Name'}
+                                            {...register('lastName')}
+                                            errorMessage={errors?.lastName?.message}
+                                    />
                             </div>
                             <div className='flex flex-col gap-3' >
-                                <input {...register('date', {
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required!'
-                                    }
-                                })} type="date" max={'2006-12-31'} placeholder="Birth date" className={`border-2 ${errors.date ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`} />
+                                <InputForm
+                                    max='2006-01-01'
+                                    type='date'
+                                    {...register('date')}
+                                    name='date'
+                                />
                                 <span className='error'>{errors.date?.message}</span>
-                                <textarea {...register('desc', {
-                                    maxLength: {
-                                        value: 1024,
-                                        message: 'This field must be no longer than 1024 symbols!'
-                                    }
-                                })} type="text" placeholder="Description" className={`border-2 ${errors.desc ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}/>
+                                <textarea {...register('desc')} type="text" placeholder="Description" className={`border-2 ${errors.desc ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}/>
                                 <span className='error'>{errors.desc?.message}</span>
-                                <select {...register('role', {
-                                    required: {
-                                        value: true,
-                                        message: 'This field is required!'
-                                    }
-                                })} name="role" id="" className={`border-2 ${errors.role ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}>
+                                <select {...register('role')} name="role" id="" className={`border-2 ${errors.role ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}>
                                     <option value="Manager">Manager</option>
                                     <option value="C-Level">C-Level</option>
                                     <option value="Worker">Worker</option>
@@ -147,12 +118,11 @@ function Form() {
                             
                                         
                                     
-                            <input type="submit" onClick={() => setImage(croppedImage)} value={'Create Employee'} className="m-auto my-5 border-2 border-blue-600 rounded-md py-2 w-[150px] cursor-pointer hover:-translate-y-1 transition-all ease-in-out bg-blue-500 text-white"/>
+                            <input type="submit" onClick={() => setImage(croppedImage)} value={'Create Employee'} className="m-auto my-5 p-2 border-2 border-blue-600 rounded-md py-2  cursor-pointer hover:-translate-y-1 transition-all ease-in-out bg-blue-500 text-white"/>
 
                             
                         </motion.form>
-                    </Suspense>
-                    </main>
+                  </main>
            
     );
 }

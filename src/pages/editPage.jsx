@@ -12,6 +12,7 @@ import InputForm from "../components/InputForm"
 import LoadingSpinner from "../components/loadingSpinner"
 import useGetUserByID from "../hooks/useGetUserByID"
 import fetchUserByID from "../services/api"
+import defaultAvatar from "../assets/images/defaultLogo.png"
 
 const EditPage = () => {
   const { id } = useParams()
@@ -89,11 +90,10 @@ const EditPage = () => {
         >
           <div className="max-w-[300px]  max-h-[300px] m-auto">
             <img
-              src={user?.image}
+              src={user?.image || defaultAvatar}
               width={150}
               height={150}
               className="rounded-md max-h-[300px]"
-              alt="NO IMAGE"
             />
           </div>
           <div>

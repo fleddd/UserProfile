@@ -5,7 +5,7 @@ import { getFirestore} from "firebase/firestore"
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD8ilulduf9dHmfsP5OomKWEtJmrdkK_BA",
+  apiKey: 'AIzaSyD8ilulduf9dHmfsP5OomKWEtJmrdkK_BA',
   authDomain: "fedkiv-crud-tools.firebaseapp.com",
   databaseURL: "https://fedkiv-crud-tools-default-rtdb.firebaseio.com",
   projectId: "fedkiv-crud-tools",

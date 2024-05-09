@@ -38,7 +38,7 @@ const HeaderModal = ({ closeModal }) => {
           }
           to={"/form"}
         >
-          Add employee
+          Add user
         </NavLink>
         <NavLink
           onClick={closeModal}

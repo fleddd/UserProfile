@@ -13,6 +13,7 @@ import { formSchema } from "../utils/formSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "react-toastify"
 import useFirestore from "../hooks/useFirestore"
+import PlaySound from "../utils/playSound"
 
 function Form() {
   const { createUserMutation } = useFirestore()
@@ -43,11 +44,13 @@ function Form() {
         image: image,
       })
       .then(() => {
+        PlaySound({ sound: "success" })
         toast.success("User was successfuly added to the database!", {
           position: "top-center",
         })
       })
       .catch((error) => {
+        PlaySound({ sound: "error" })
         toast.error(`Some error occured here... ${error.message}`, {
           position: "top-center",
         })
@@ -77,7 +80,7 @@ function Form() {
         className="flex flex-col justify-start items-start max-w-[300px] "
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 mb-5">
           <InputForm
             label={"First Name"}
             {...register("firstName")}
@@ -93,8 +96,6 @@ function Form() {
             {...register("lastName")}
             errorMessage={errors?.lastName?.message}
           />
-        </div>
-        <div className="flex flex-col gap-3">
           <InputForm
             max="2006-01-01"
             min="1900-01-01"
@@ -102,27 +103,30 @@ function Form() {
             {...register("date")}
             name="date"
           />
-          <span className="error">{errors.date?.message}</span>
-          <textarea
-            {...register("desc")}
-            type="text"
-            placeholder="Description"
-            className={`border-2 ${errors.desc ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}
-          />
-          <span className="error">{errors.desc?.message}</span>
+
           <select
             {...register("role")}
             name="role"
             id=""
-            className={`border-2 ${errors.role ? "border-red-500" : "border-blue-800"} w-[300px] px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}
+            className={`border-2 ${errors.role ? "border-red-500" : "border-blue-800"} w-[300px] px-2 h-[44px] rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}
           >
             <option value="Manager">Manager</option>
             <option value="C-Level">C-Level</option>
             <option value="Worker">Worker</option>
             <option value="Staff">Staff</option>
           </select>
-          <span className="error">{errors.role?.message}</span>
-
+          <p className="error">{errors.role?.message}</p>
+          <textarea
+            {...register("desc")}
+            type="text"
+            placeholder="Description"
+            className={`border-2 ${errors.desc ? "border-red-500" : "border-blue-800"} w-[300px] min-h-[150px]  px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out resize-none`}
+          />
+          <p className={`error ${!errors.desc && "hidden"}`}>
+            {errors.desc?.message}
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 w-full">
           <UploadImage
             image={image}
             setImage={setImage}

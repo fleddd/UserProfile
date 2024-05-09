@@ -144,7 +144,7 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
           <div className="flex flex-col gap-3 items-center justify-center">
             {image && (
               <>
-                <div className="flex gap-3 flex-col items-center">
+                <div className="flex gap-3 flex-col justify-center items-center">
                   {!croppedImage ? (
                     <div>
                       <ReactCrop
@@ -186,7 +186,7 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
                       </div>
                     </div>
                   ) : (
-                    <div>
+                    <div className="flex flex-col justify-center items-center">
                       <p>Image Preview:</p>
                       <img width={150} height={150} src={croppedImage} alt="" />
                     </div>

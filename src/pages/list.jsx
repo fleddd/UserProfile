@@ -1,20 +1,14 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import { Grid } from "@mui/material"
 
-import { useNavigate } from "react-router-dom"
-
 import { motion } from "framer-motion"
 import { Image } from "../components"
-import { toast } from "react-toastify"
 import LoadingSpinner from "../components/loadingSpinner"
 import useFirestore from "../hooks/useFirestore"
-import { getAllUsers } from "../services/api"
-import { useState } from "react"
+import GridActions from "../components/gridActions"
 
 const List = () => {
-  const { users, isLoading, deleteUserMutation, isFetched } = useFirestore()
-  const navigate = useNavigate()
-  const [deleteDialog, setDeleteDialog] = useState(false)
+  const { users, isLoading } = useFirestore()
 
   const CustomNoRowsOverlay = () => {
     return (
@@ -50,38 +44,7 @@ const List = () => {
       field: "action",
       headerName: "Actions",
       width: 100,
-      renderCell: (params) => {
-        return (
-          <div className="flex items-center h-full gap-4">
-            <div
-              onClick={() => navigate(`/list/${params.id}`)}
-              className="hover:scale-90 transition-all ease-in-out"
-            >
-              <Image.View width={30} height={30} />
-            </div>
-            <div
-              onClick={() => {
-                deleteUserMutation
-                  .mutateAsync({ id: params.row.id })
-                  .then(() => {
-                    toast.success("User was successfuly deleted!", {
-                      position: "top-center",
-                    })
-                  })
-                  .catch((errors) => {
-                    toast.warn(`Something went wrong... ${errors}`, {
-                      position: "top-center",
-                    })
-                    console.error(errors)
-                  })
-              }}
-              className="hover:scale-90 transition-all ease-in-out"
-            >
-              <Image.DeleteIcon width={30} height={30} />
-            </div>
-          </div>
-        )
-      },
+      renderCell: (params) => <GridActions id={params.row.id} />,
     },
   ]
 

@@ -2,47 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: sans-serif;
 }
+body {
+  width: 100%;
+  height: 100%;
+}
 
-.activeNav{
+.activeNav {
   background-color: transparent;
   color: white;
   border: 2px solid white;
 }
 
-.hidden{
-  display: none;
-  appearance: none;
-  height: 0;
-  width: 0;
-  margin: 0;
-  padding: 0;
-}
-body{
-  padding-bottom: 50px;
-}
-.error{
+.error {
   color: red;
 }
-.MuiDataGrid-toolbarContainer{
+.MuiDataGrid-toolbarContainer {
   flex-direction: row-reverse;
 }
 .css-wop1k0-MuiDataGrid-footerContainer {
- justify-content: center;
+  justify-content: center;
 }
-.activeMenu{
+.activeMenu {
   transform: translateX(0);
 }
 .GridColDef {
   display: flex;
   flex: 1;
 }
-.MuiDataGrid-cellEmpty{
+.MuiDataGrid-cellEmpty {
   display: none;
   appearance: none;
   height: 0;
@@ -50,7 +43,7 @@ body{
   margin: 0;
   padding: 0;
 }
-.MuiDataGrid-filler{
+.MuiDataGrid-filler {
   display: none;
   appearance: none;
   height: 0;
@@ -58,16 +51,16 @@ body{
   margin: 0;
   padding: 0;
 }
-.css-yrdy0g-MuiDataGrid-columnHeaderRow{
+.css-yrdy0g-MuiDataGrid-columnHeaderRow {
   width: fit-content;
 }
-.MuiDataGrid-row{
+.MuiDataGrid-row {
   width: 100%;
 }
-.MuiDataGrid-row--firstVisible{
+.MuiDataGrid-row--firstVisible {
   width: 100%;
 }
-.MuiDataGrid-row--firstVisible{
+.MuiDataGrid-row--firstVisible {
   display: none;
   appearance: none;
   height: 0;
@@ -75,11 +68,11 @@ body{
   margin: 0;
   padding: 0;
 }
-.MuiDataGrid-columnHeaderTitleContainer{
+.MuiDataGrid-columnHeaderTitleContainer {
   justify-content: center;
 }
 @media (max-width: 760px) {
-  .MuiDataGrid-main{
+  .MuiDataGrid-main {
     width: 100%;
-  } 
+  }
 }

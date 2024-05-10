@@ -2,14 +2,17 @@ import { NavLink, useLocation } from "react-router-dom"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { motion } from "framer-motion"
 import HeaderModal from "./headerModal"
 import ThemeToggle from "./themeToggle"
 import SoundToggle from "./soundToggle"
+import { ThemeContext } from "../App"
 
 library.add(faBars)
+
 function Header() {
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext)
   const routerPath = useLocation()
   const [isBurgerMenu, toggleBurgerMenu] = useState(false)
   const closeModal = () => {
@@ -17,8 +20,8 @@ function Header() {
   }
 
   return (
-    <header className={`w-full mb-5 static top-0 z-2`}>
-      <div className="w-full font-bold h-[100px] bg-blue-500 flex items-center justify-between px-10">
+    <header className={`w-full static top-0 z-2 ${darkMode && "dark"}`}>
+      <div className="w-full font-bold h-[100px] bg-blue-500 dark:bg-neutral-950 flex items-center justify-between px-10">
         <h1 className="text-2xl sm:text-3xl md:text-4xl   text-white select-none">
           Bussiness Tools
         </h1>
@@ -44,19 +47,19 @@ function Header() {
           </motion.div>
           <nav className="hidden h-full sm:flex justify-center gap-3 items-center sm:text-md md:text-xl font-bold">
             <NavLink
-              className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/" && "activeNav"}`}
+              className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
               to={"/"}
             >
               Dashboard
             </NavLink>
             <NavLink
-              className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/form" && "activeNav"}`}
+              className={` transition-allease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/form" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
               to={"/form"}
             >
               Add
             </NavLink>
             <NavLink
-              className={` transition-all bg-white text-blue-500 ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/list" && "activeNav"}`}
+              className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/list" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
               to={"/list"}
             >
               List

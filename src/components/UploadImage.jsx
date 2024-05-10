@@ -123,7 +123,7 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
   return (
     <>
       <div
-        className={`${image ? "hidden" : ""} w-[300px] mt-5 cursor-pointer h-[200px] border-dashed hover:border-yellow-500 transition-all ease-in-out border-blue-500 border-2 rounded-md p- flex flex-col gap-2 justify-center tems-center`}
+        className={`${image ? "hidden" : ""} w-[300px] mt-5 cursor-pointer h-[200px] border-dashed hover:border-yellow-500 hover:dark:border-white transition-all ease-in-out border-blue-500 dark:border-neutral-700 border-2 rounded-md p- flex flex-col gap-2 justify-center tems-center`}
         onClick={handleOnSelect}
       >
         <FontAwesomeIcon icon="upload" size="2xl" />

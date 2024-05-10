@@ -6,9 +6,7 @@ const SoundToggle = () => {
     <div
       className="hover:translate-y-[-1px] transition-all ease-in-out"
       onClick={onClickHandle}
-    >
-      <p>Sound</p>
-    </div>
+    ></div>
   )
 }
 

@@ -1,14 +1,17 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid"
-import { Grid } from "@mui/material"
+import { Grid, createTheme, ThemeProvider } from "@mui/material"
 
 import { motion } from "framer-motion"
 import { Image } from "../components"
 import LoadingSpinner from "../components/loadingSpinner"
 import useFirestore from "../hooks/useFirestore"
 import GridActions from "../components/gridActions"
+import { ThemeContext } from "../App"
+import { useContext } from "react"
 
 const List = () => {
   const { users, isLoading } = useFirestore()
+  const { darkMode } = useContext(ThemeContext)
 
   const CustomNoRowsOverlay = () => {
     return (
@@ -51,7 +54,17 @@ const List = () => {
   if (isLoading) {
     return <LoadingSpinner />
   }
-
+  const theme = createTheme({
+    components: {
+      MuiDataGrid: {
+        styleOverrides: {
+          root: {
+            "--DataGrid-containerBackground": `${darkMode ? "rgb(38, 38, 38)" : "white"}`, // Change the background color here
+          },
+        },
+      },
+    },
+  })
   return (
     <motion.main
       initial={{
@@ -67,47 +80,60 @@ const List = () => {
       }}
       className="w-[100%]"
     >
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <div style={{ height: 400, width: "100%" }}>
-            <DataGrid
-              sx={{
-                alignItems: "center",
-                gap: 5,
-                "--DataGrid-overlayHeight": "500px",
-                minHeight: "700px",
-              }}
-              autoHeight
-              pagination
-              initialState={{
-                pagination: {
-                  paginationModel: {
-                    pageSize: 10,
+      <ThemeProvider theme={theme}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <div style={{ height: 400, width: "100%" }}>
+              <DataGrid
+                sx={{
+                  alignItems: "center",
+                  gap: 5,
+                  "--DataGrid-overlayHeight": "500px",
+                  minHeight: "700px",
+                  border: "none",
+                  color: `${darkMode ? "white" : "black"}`,
+                  "& .css-c63i49-MuiInputBase-input-MuiInput-input": {
+                    color: `${darkMode ? "white" : "black"}`,
                   },
-                },
-              }}
-              pageSizeOptions={[10]}
-              slots={{
-                toolbar: GridToolbar,
-                noRowsOverlay: CustomNoRowsOverlay,
-              }}
-              disableColumnFilter
-              disableDensitySelector
-              disableColumnSelector
-              disableRowSelectionOnClick
-              disableColumnMenu
-              slotProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 500 },
-                },
-              }}
-              rows={users}
-              columns={columns}
-            />
-          </div>
+                  "& .MuiSvgIcon-root": {
+                    fill: `${darkMode ? "white" : "black"}`, // Change the color of the search icon
+                  },
+                  "& .css-levciy-MuiTablePagination-displayedRows": {
+                    color: `${darkMode ? "white" : "black"}`,
+                  },
+                }}
+                autoHeight
+                pagination
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 10,
+                    },
+                  },
+                }}
+                pageSizeOptions={[10]}
+                slots={{
+                  toolbar: GridToolbar,
+                  noRowsOverlay: CustomNoRowsOverlay,
+                }}
+                disableColumnFilter
+                disableDensitySelector
+                disableColumnSelector
+                disableRowSelectionOnClick
+                disableColumnMenu
+                slotProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                    quickFilterProps: { debounceMs: 500 },
+                  },
+                }}
+                rows={users}
+                columns={columns}
+              />
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </motion.main>
   )
 }

@@ -69,7 +69,7 @@ const EditPage = () => {
           },
         }}
         key={user?.id}
-        className={`border-2 border-blue-800 md:max-w-1300px flex flex-col justify-between text-black text-xl rounded-2xl p-5 shadow-md shadow-blue-400`}
+        className={`border-2 border-blue-800 md:max-w-1300px flex flex-col justify-between text-black text-xl rounded-2xl p-5 shadow-md dark:border-neutral-700 dark:text-white`}
       >
         <form
           className="flex flex-col gap-5  md:grid md:grid-cols-[200px_minmax(320px,_1fr)_100px] px-4"
@@ -79,7 +79,7 @@ const EditPage = () => {
           <div className="max-w-[300px]  max-h-[300px] m-auto flex flex-col items-center">
             <label
               htmlFor="avatarImage"
-              className="text-blue-800 font-bold text-base"
+              className="text-blue-800 font-bold text-base dark:text-white"
             >
               User image
             </label>
@@ -93,28 +93,36 @@ const EditPage = () => {
           </div>
           <div>
             <div className="flex flex-col gap-[2px]">
-              <p className="text-blue-800 font-bold text-base">First name:</p>
+              <p className="text-blue-800 dark:text-white font-bold text-base">
+                First name:
+              </p>
               <InputForm
                 {...register(`firstName`)}
                 errorMessage={errors?.firstName?.message}
                 readOnly={!isEditable}
               />
 
-              <p className="text-blue-800 font-bold text-base">Middle name:</p>
+              <p className="text-blue-800 dark:text-white font-bold text-base">
+                Middle name:
+              </p>
               <InputForm
                 {...register(`middleName`)}
                 readOnly={!isEditable}
                 errorMessage={errors?.middleName?.message}
               />
 
-              <p className="text-blue-800 font-bold text-base">Last name:</p>
+              <p className="text-blue-800 dark:text-white font-bold text-base">
+                Last name:
+              </p>
               <InputForm
                 {...register(`lastName`)}
                 readOnly={!isEditable}
                 errorMessage={errors?.lastName?.message}
               />
 
-              <p className="text-blue-800 font-bold text-base">Birth date:</p>
+              <p className="text-blue-800 dark:text-white font-bold text-base">
+                Birth date:
+              </p>
               <InputForm
                 {...register(`date`)}
                 type={"date"}
@@ -123,35 +131,50 @@ const EditPage = () => {
                 errorMessage={errors?.date?.message}
               />
 
-              <p className="text-blue-800 font-bold text-base">Role:</p>
+              <p className="text-blue-800 dark:text-white font-bold text-base">
+                Role:
+              </p>
               <select
                 disabled={!isEditable}
                 {...register(`role`)}
-                className="focus:outline-none border-2 border-blue-800  w-[300px] px-2 py-2 rounded-md overflow-hidden bg-transparent focus:border-yellow-500 transition-all ease-in-out mb-[4px]"
+                className="focus:outline-none border-2 border-blue-800 dark:border-neutral-700 dark:text-white  w-[300px] px-2 py-2 rounded-md overflow-hidden bg-transparent focus:border-yellow-500 transition-all ease-in-out mb-[4px]"
               >
-                <option checked value="manager" className="text-black">
+                <option
+                  checked
+                  value="manager"
+                  className="text-black forced-color-adjust-auto dark:bg-neutral-950 dark:text-white"
+                >
                   Manager
                 </option>
-                <option value="C-Level" className="text-black">
+                <option
+                  value="C-Level"
+                  className="text-black forced-color-adjust-auto dark:bg-neutral-950 dark:text-white"
+                >
                   C-Level
                 </option>
-                <option value="Worker" className="text-black">
+                <option
+                  value="Worker"
+                  className="text-black forced-color-adjust-auto dark:bg-neutral-950 dark:text-white"
+                >
                   Worker
                 </option>
-                <option value="Staff" className="text-black">
+                <option
+                  value="Staff"
+                  className="text-black forced-color-adjust-auto dark:bg-neutral-950 dark:text-white"
+                >
                   Staff
                 </option>
               </select>
             </div>
             <div>
-              <p className="text-blue-800 font-bold text-base mb-[2px]">
+              <p className="text-blue-800 dark:text-white font-bold text-base mb-[2px]">
                 Description:
               </p>
               <textarea
                 readOnly={!isEditable}
                 maxLength={1024}
                 {...register(`desc`)}
-                className="text-2xl max-w-[300px] w-full min-h-[200px] max-h-[500px] resize-none p-2 border-2 border-blue-800 rounded-md placeholder:text-base bg-transparent focus:outline-none transition-all ease-in-out mb-[16px]"
+                className="text-2xl max-w-[300px] w-full min-h-[200px] max-h-[500px] resize-none p-2 border-2 border-blue-800 dark:border-neutral-700 dark:text-white rounded-md placeholder:text-base bg-transparent focus:outline-none transition-all ease-in-out mb-[16px]"
                 placeholder="User's description..."
               />
             </div>

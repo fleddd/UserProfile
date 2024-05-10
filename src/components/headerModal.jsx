@@ -8,7 +8,7 @@ const HeaderModal = ({ closeModal }) => {
         opacity: [0, 1],
       }}
       exit={{ x: -500, opacity: 0 }}
-      className="py-4 bg-white border-b-4 border-blue-500 absolute w-full h-[35%] z-[1]"
+      className="py-4 bg-white dark:bg-neutral-950 border-b-4 border-blue-500  dark:border-neutral-700 absolute w-full h-[35%] z-[1]"
     >
       <motion.div
         initial={{
@@ -25,7 +25,7 @@ const HeaderModal = ({ closeModal }) => {
         <NavLink
           onClick={closeModal}
           className={
-            "bg-white text-4xl font-bold p-2 text-blue-500 border-2 border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
           to={"/"}
         >
@@ -34,7 +34,7 @@ const HeaderModal = ({ closeModal }) => {
         <NavLink
           onClick={closeModal}
           className={
-            "bg-white text-4xl font-bold p-2 text-blue-500 border-2 border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
           to={"/form"}
         >
@@ -43,7 +43,7 @@ const HeaderModal = ({ closeModal }) => {
         <NavLink
           onClick={closeModal}
           className={
-            "bg-white text-4xl font-bold p-2 text-blue-500 border-2 border-blue-500 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
           to={"/list"}
         >

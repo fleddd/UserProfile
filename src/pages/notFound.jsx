@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 const NotFound = () => {
   return (
     <main className="w-full h-[500px] flex flex-col justify-center items-center">
-      <div className="flex flex-col gap-2 text-2xl justify-center font-bold">
+      <div className="flex flex-col gap-2 text-2xl justify-center font-bold dark:text-white">
         <h1 className="text-6xl">Error: 404</h1>
         <h2>This page never existed...</h2>
       </div>

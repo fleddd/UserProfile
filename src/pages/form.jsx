@@ -108,7 +108,7 @@ function Form() {
             {...register("role")}
             name="role"
             id=""
-            className={`border-2 ${errors.role ? "border-red-500" : "border-blue-800"} w-[300px] px-2 h-[44px] rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}
+            className={`dark:bg-neutral-800 dark:text-white border-2 ${errors.role ? "border-red-500" : "border-blue-800 dark:border-neutral-900"} w-[300px] px-2 h-[44px] rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out`}
           >
             <option value="Manager">Manager</option>
             <option value="C-Level">C-Level</option>
@@ -120,7 +120,7 @@ function Form() {
             {...register("desc")}
             type="text"
             placeholder="Description"
-            className={`border-2 ${errors.desc ? "border-red-500" : "border-blue-800"} w-[300px] min-h-[150px]  px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out resize-none`}
+            className={`dark:bg-neutral-800 dark:text-white border-2 ${errors.desc ? "border-red-500" : "border-blue-800 dark:border-neutral-900"} w-[300px] min-h-[150px]  px-2 py-2 rounded-md focus:outline-none focus:border-yellow-500 transition-all ease-in-out resize-none`}
           />
           <p className={`error ${!errors.desc && "hidden"}`}>
             {errors.desc?.message}
@@ -139,7 +139,7 @@ function Form() {
           type="submit"
           onClick={() => setImage(croppedImage)}
           value={"Create User"}
-          className="m-auto my-5 p-2 border-2 border-blue-600 rounded-md py-2  cursor-pointer hover:-translate-y-1 transition-all ease-in-out bg-blue-500 text-white"
+          className="m-auto my-5 p-2 border-2 border-blue-600 dark:border-neutral-800 rounded-md py-2  cursor-pointer hover:-translate-y-1 transition-all ease-in-out bg-blue-500 dark:bg-neutral-700 text-white"
         />
       </motion.form>
     </main>

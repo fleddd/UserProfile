@@ -1,12 +1,19 @@
+import { useContext } from "react"
+import { SoundContext } from "../App"
+import { Image } from "."
 const SoundToggle = () => {
+  const { toggleSoundAllowed, isSoundAllowed } = useContext(SoundContext)
+
   function onClickHandle() {
-    // ...
+    toggleSoundAllowed()
   }
   return (
     <div
-      className="hover:translate-y-[-1px] transition-all ease-in-out"
+      className="hover:translate-y-[-1px] transition-all ease-in-out cursor-pointer"
       onClick={onClickHandle}
-    ></div>
+    >
+      {isSoundAllowed ? <Image.SoundEnabled /> : <Image.SoundDisabled />}
+    </div>
   )
 }
 

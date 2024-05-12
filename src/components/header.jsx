@@ -23,7 +23,7 @@ function Header() {
           Bussiness Tools
         </h1>
         <div className="flex gap-5 items-center justify-center">
-          <div className="flex gap-2">
+          <div className="flex gap-4">
             <ThemeToggle />
             <SoundToggle />
           </div>

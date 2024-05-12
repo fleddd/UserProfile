@@ -9,7 +9,7 @@ const ThemeToggle = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext)
   return (
     <div
-      className="hover:translate-y-[-1px] transition-all ease-in-out text-blue-800"
+      className="hover:translate-y-[-1px] transition-all ease-in-out"
       onClick={onClickHandle}
     >
       {darkMode ? <Image.Night /> : <Image.Sun />}

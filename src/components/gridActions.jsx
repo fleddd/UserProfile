@@ -3,12 +3,13 @@ import { Image } from "../components"
 import useFirestore from "../hooks/useFirestore"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import PlaySound from "../utils/playSound"
+import usePlaySound from "../hooks/usePlaySound"
 
 const GridActions = ({ id }) => {
   const [deleteDialog, setDeleteDialog] = useState(false)
   const { deleteUserMutation } = useFirestore()
   const navigate = useNavigate()
+  const { playSuccess, playError, playClick } = usePlaySound()
 
   if (deleteDialog) {
     return (
@@ -19,13 +20,13 @@ const GridActions = ({ id }) => {
             deleteUserMutation
               .mutateAsync({ id: id })
               .then(() => {
-                PlaySound({ sound: "success" })
+                playSuccess()
                 toast.success("User was successfuly deleted!", {
                   position: "top-center",
                 })
               })
               .catch((errors) => {
-                PlaySound({ sound: "error" })
+                playError()
                 toast.warn(`Something went wrong... ${errors}`, {
                   position: "top-center",
                 })
@@ -39,7 +40,7 @@ const GridActions = ({ id }) => {
           className="hover:scale-90 transition-all ease-in-out "
           onClick={() => {
             setDeleteDialog((prev) => !prev)
-            PlaySound({ sound: "click" })
+            playClick()
           }}
         >
           <Image.Cancel width={30} height={30} />
@@ -53,7 +54,7 @@ const GridActions = ({ id }) => {
       <div
         className="hover:scale-90 transition-all ease-in-out "
         onClick={() => {
-          PlaySound({ sound: "click" })
+          playClick()
           navigate(`/list/${id}`)
         }}
       >
@@ -62,7 +63,7 @@ const GridActions = ({ id }) => {
       <div
         className="hover:scale-90 transition-all ease-in-out "
         onClick={() => {
-          PlaySound({ sound: "click" })
+          playClick()
           setDeleteDialog((prev) => !prev)
         }}
       >

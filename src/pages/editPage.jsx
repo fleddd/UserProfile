@@ -12,13 +12,15 @@ import useGetUserByID from "../hooks/useGetUserByID"
 import fetchUserByID from "../services/api"
 import defaultAvatar from "../assets/images/defaultLogo.png"
 import useFirestore from "../hooks/useFirestore"
-import PlaySound from "../utils/playSound"
+import usePlaySound from "../hooks/usePlaySound"
 
 const EditPage = () => {
   const { id } = useParams()
   const { user, isLoading } = useGetUserByID(id)
   const { editUserMutation } = useFirestore()
   const [isEditable, setIsEditable] = useState(false)
+  const { playSuccess, playError, playClick } = usePlaySound()
+
   const {
     register,
     handleSubmit,
@@ -36,7 +38,7 @@ const EditPage = () => {
         id: id,
       })
       .then(() => {
-        PlaySound({ sound: "success" })
+        playSuccess()
         toast.success("Data was successfuly updated!", {
           position: "top-center",
           duration: 1000,
@@ -44,7 +46,7 @@ const EditPage = () => {
         setIsEditable(false)
       })
       .catch((error) => {
-        PlaySound({ sound: "error" })
+        playError()
         toast.error("Data wasnt updated")
         console.error(error)
       })
@@ -193,7 +195,7 @@ const EditPage = () => {
                   className="px-4 py-2 bg-blue-600 rounded-2xl hover:scale-95 transition-all ease"
                   onClick={() => {
                     setIsEditable(true)
-                    PlaySound({ sound: "click" })
+                    playClick()
                   }}
                   text="Edit"
                 />
@@ -202,7 +204,7 @@ const EditPage = () => {
                 <Button
                   styles={"bg-red-700"}
                   onClick={() => {
-                    PlaySound({ sound: "click" })
+                    playClick()
                     setIsEditable(false)
                     reset()
                   }}
@@ -213,10 +215,7 @@ const EditPage = () => {
 
             <div className={`${isEditable && "hidden"} flex gap-3 flex-wrap`}>
               <Link to={"/list"}>
-                <Button
-                  text={"Back"}
-                  onClick={() => PlaySound({ sound: "click" })}
-                />
+                <Button text={"Back"} onClick={() => playClick()} />
               </Link>
             </div>
           </div>

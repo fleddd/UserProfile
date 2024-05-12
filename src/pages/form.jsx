@@ -13,11 +13,11 @@ import { formSchema } from "../utils/formSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "react-toastify"
 import useFirestore from "../hooks/useFirestore"
-import PlaySound from "../utils/playSound"
+import usePlaySound from "../hooks/usePlaySound"
 
 function Form() {
   const { createUserMutation } = useFirestore()
-
+  const { playSuccess, playError } = usePlaySound()
   const [image, setImage] = useState("")
   const [croppedImage, setCroppedImage] = useState("")
   const {
@@ -44,13 +44,13 @@ function Form() {
         image: image,
       })
       .then(() => {
-        PlaySound({ sound: "success" })
+        playSuccess()
         toast.success("User was successfuly added to the database!", {
           position: "top-center",
         })
       })
       .catch((error) => {
-        PlaySound({ sound: "error" })
+        playError()
         toast.error(`Some error occured here... ${error.message}`, {
           position: "top-center",
         })

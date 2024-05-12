@@ -6,17 +6,6 @@ const ThemeToggle = () => {
   function onClickHandle() {
     toggleDarkMode()
   }
-  // LIGHT
-  // background #ffffff
-  // primary #3B82F6
-  // secondary #1e40af
-  // white #ffffff
-
-  // Dark
-  // background #131414
-  // primary #1a1d21
-  // secondary #131414
-  // white #ffffff
   const { darkMode, toggleDarkMode } = useContext(ThemeContext)
   return (
     <div

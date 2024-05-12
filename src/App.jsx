@@ -7,22 +7,30 @@ import { createContext, useState, useEffect } from "react"
 export const ThemeContext = createContext(false)
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedDarkMode = localStorage.getItem("darkTheme")
+    return savedDarkMode ? JSON.parse(savedDarkMode) : false
+  })
+
   function toggleDarkMode() {
-    setDarkMode((current) => !current)
+    setDarkMode((current) => {
+      localStorage.setItem("darkTheme", !darkMode)
+      return !current
+    })
   }
+  useEffect(() => {
+    const rootElement = document.getElementById("root")
+    darkMode
+      ? rootElement.classList.add("dark")
+      : rootElement.classList.remove("dark")
+  }, [darkMode])
 
   return (
-    <div className={`${darkMode && "dark"}`}>
-      <div
-        className="flex flex-col gap-5 min-h-screen dark:bg-neutral-900"
-        data-mui-color-scheme="dark"
-      >
-        <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
-          <Header />
-          <Router />
-        </ThemeContext.Provider>
-      </div>
+    <div className="flex flex-col gap-5 min-h-screen dark:bg-neutral-900">
+      <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+        <Header />
+        <Router />
+      </ThemeContext.Provider>
 
       <ToastContainer
         darkMode={darkMode}

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
-import LoadingSpinner from "../components/loadingSpinner"
-import useFirestore from "../hooks/useFirestore"
+import useFirestore from "../../hooks/useFirestore"
+
+import { LoadingSpinner } from "../../components"
 
 const Dashboard = () => {
   const { users, isLoading } = useFirestore()

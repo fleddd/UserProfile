@@ -4,9 +4,11 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { motion } from "framer-motion"
+
 import HeaderModal from "./headerModal"
-import ThemeToggle from "./themeToggle"
 import SoundToggle from "./soundToggle"
+import ThemeToggle from "./themeToggle"
+
 library.add(faBars)
 
 function Header() {
@@ -17,8 +19,8 @@ function Header() {
   }
 
   return (
-    <header className={`w-full static top-0 z-2`}>
-      <div className="w-full font-bold h-[100px] bg-blue-500 dark:bg-neutral-950 flex items-center justify-between px-10">
+    <header className={`w-full static top-0 z-2 pb-5`}>
+      <div className="w-full font-bold h-[100px] gap-3 bg-blue-500 dark:bg-neutral-950 flex items-center justify-between px-10">
         <h1 className="text-2xl sm:text-3xl md:text-4xl   text-white select-none">
           Bussiness Tools
         </h1>

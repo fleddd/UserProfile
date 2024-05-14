@@ -1,17 +1,18 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import { Grid, createTheme, ThemeProvider } from "@mui/material"
-
 import { motion } from "framer-motion"
-import { Image } from "../components"
-import LoadingSpinner from "../components/loadingSpinner"
-import useFirestore from "../hooks/useFirestore"
-import GridActions from "../components/gridActions"
-import { ThemeContext } from "../App"
-import { useContext } from "react"
+
+import useFirestore from "../../hooks/useFirestore"
+import useTheme from "../../hooks/useTheme"
+
+import { Image } from "../../components"
+import { LoadingSpinner } from "../../components"
+
+import GridActions from "./gridActions"
 
 const List = () => {
   const { users, isLoading } = useFirestore()
-  const { darkMode } = useContext(ThemeContext)
+  const { darkMode } = useTheme()
 
   const CustomNoRowsOverlay = () => {
     return (
@@ -78,17 +79,17 @@ const List = () => {
           duration: 0.7,
         },
       }}
-      className="w-[100%]"
+      className="w-[100%] h-full"
     >
       <ThemeProvider theme={theme}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <div style={{ height: 400, width: "100%" }}>
+            <div style={{ height: "100%", width: "100%" }}>
               <DataGrid
                 sx={{
                   alignItems: "center",
                   gap: 5,
-                  "--DataGrid-overlayHeight": "500px",
+                  "--DataGrid-overlayHeight": "400px",
                   minHeight: "700px",
                   border: "none",
                   color: `${darkMode ? "white" : "black"}`,

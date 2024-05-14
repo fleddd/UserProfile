@@ -1,21 +1,22 @@
 import { useParams, Link } from "react-router-dom"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import Button from "../components/button"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { motion } from "framer-motion"
 import { toast } from "react-toastify"
-import { formSchema } from "../utils/formSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import InputForm from "../components/InputForm"
-import LoadingSpinner from "../components/loadingSpinner"
-import useGetUserByID from "../hooks/useGetUserByID"
-import fetchUserByID from "../services/api"
-import defaultAvatar from "../assets/images/defaultLogo.png"
-import useFirestore from "../hooks/useFirestore"
-import usePlaySound from "../hooks/usePlaySound"
+import { formSchema } from "../../utils/formSchema"
+import fetchUserByID from "../../services/api"
+import useGetUserByID from "../../hooks/useGetUserByID"
+import useFirestore from "../../hooks/useFirestore"
+import usePlaySound from "../../hooks/usePlaySound"
 
-const EditPage = () => {
+import { LoadingSpinner, InputForm, Button } from "../../components"
+
+import defaultAvatar from "../../assets/images/defaultLogo.png"
+
+const Edit = () => {
   const { id } = useParams()
+
   const { user, isLoading } = useGetUserByID(id)
   const { editUserMutation } = useFirestore()
   const [isEditable, setIsEditable] = useState(false)
@@ -225,4 +226,4 @@ const EditPage = () => {
   )
 }
 
-export default EditPage
+export default Edit

@@ -1,0 +1,5 @@
+export { default as Dashboard } from "./dashboard/Dashboard"
+export { default as List } from "./list/list"
+export { default as Edit } from "./edit/Edit"
+export { default as Form } from "./form/form"
+export { default as NotFound } from "./error/notFound"

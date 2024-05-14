@@ -4,16 +4,17 @@
 
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
-import UploadImage from "../components/UploadImage"
 import "react-image-crop/dist/ReactCrop.css"
-
-import { motion } from "framer-motion"
-import InputForm from "../components/InputForm"
-import { formSchema } from "../utils/formSchema"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "react-toastify"
-import useFirestore from "../hooks/useFirestore"
-import usePlaySound from "../hooks/usePlaySound"
+import { motion } from "framer-motion"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+import { formSchema } from "../../utils/formSchema"
+import useFirestore from "../../hooks/useFirestore"
+import usePlaySound from "../../hooks/usePlaySound"
+
+import { InputForm } from "../../components"
+import UploadImage from "./UploadImage"
 
 function Form() {
   const { createUserMutation } = useFirestore()

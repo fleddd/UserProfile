@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom"
-import { Image } from "../components"
-import useFirestore from "../hooks/useFirestore"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import usePlaySound from "../hooks/usePlaySound"
+
+import usePlaySound from "../../hooks/usePlaySound"
+import useFirestore from "../../hooks/useFirestore"
+
+import { Image } from "../../components"
 
 const GridActions = ({ id }) => {
   const [deleteDialog, setDeleteDialog] = useState(false)

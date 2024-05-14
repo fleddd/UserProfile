@@ -1,10 +1,9 @@
 import { ThreeDots } from "react-loader-spinner"
 import { motion } from "framer-motion"
-import { useContext } from "react"
-import { ThemeContext } from "../App"
+import useTheme from "../hooks/useTheme"
 
 const LoadingSpinner = () => {
-  const { darkMode } = useContext(ThemeContext)
+  const { darkMode } = useTheme()
 
   return (
     <main className="w-full mt-40 flex items-center justify-center flex-col gap-10">

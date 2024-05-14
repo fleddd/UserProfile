@@ -1,8 +1,7 @@
-import { useContext } from "react"
-import { SoundContext } from "../App"
-import { Image } from "."
+import { Image } from "../../components"
+import usePlaySound from "../../hooks/usePlaySound"
 const SoundToggle = () => {
-  const { toggleSoundAllowed, isSoundAllowed } = useContext(SoundContext)
+  const { toggleSoundAllowed, isSoundAllowed } = usePlaySound()
 
   function onClickHandle() {
     toggleSoundAllowed()

@@ -1,11 +1,11 @@
 import success from "../assets/sounds/success.mp3"
 import error from "../assets/sounds/error.m4a"
 import click from "../assets/sounds/click.mp3"
-import { useContext, useState } from "react"
-import { SoundContext } from "../App"
+import { useContext } from "react"
+import { SoundContext } from "../context/SoundProvider"
 
 function usePlaySound() {
-  const { isSoundAllowed } = useContext(SoundContext)
+  const { isSoundAllowed, toggleSoundAllowed } = useContext(SoundContext)
   const playSuccess = () => {
     if (!isSoundAllowed) return
     new Audio(success).play()
@@ -19,7 +19,13 @@ function usePlaySound() {
     new Audio(click).play()
   }
 
-  return { playClick, playError, playSuccess }
+  return {
+    playClick,
+    playError,
+    playSuccess,
+    toggleSoundAllowed,
+    isSoundAllowed,
+  }
 }
 
 export default usePlaySound

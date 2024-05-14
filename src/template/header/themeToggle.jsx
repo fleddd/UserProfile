@@ -1,12 +1,11 @@
-import { ThemeContext } from "../App"
-import { useContext } from "react"
-import { Image } from "."
+import { Image } from "../../components"
+import useTheme from "../../hooks/useTheme"
 
 const ThemeToggle = () => {
   function onClickHandle() {
     toggleDarkMode()
   }
-  const { darkMode, toggleDarkMode } = useContext(ThemeContext)
+  const { darkMode, toggleDarkMode } = useTheme()
   return (
     <div
       className="hover:translate-y-[-1px] transition-all ease-in-out"

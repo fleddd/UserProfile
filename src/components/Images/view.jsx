@@ -1,7 +1,6 @@
-import { ThemeContext } from "../../App"
-import { useContext } from "react"
+import useTheme from "../../hooks/useTheme"
 const view = () => {
-  const { darkMode } = useContext(ThemeContext)
+  const { darkMode } = useTheme()
   return (
     <svg
       className="cursor-pointer"

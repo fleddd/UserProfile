@@ -5,11 +5,11 @@ import ReactCrop, {
   makeAspectCrop,
 } from "react-image-crop"
 
-import Button from "./button"
-
+import Button from "../../components/button"
 import { faUpload } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
+import useTheme from "../../hooks/useTheme"
 
 const MIN_DIMENSION = 150
 const ASPECT_RATIO = 1
@@ -17,6 +17,8 @@ const ASPECT_RATIO = 1
 library.add(faUpload)
 
 const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
+  const { darkMode } = useTheme()
+
   const imgRef = useRef(null)
   const canvasRef = useRef(null)
   const [error, setError] = useState("")
@@ -126,7 +128,11 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
         className={`${image ? "hidden" : ""} w-[300px] mt-5 cursor-pointer h-[200px] border-dashed hover:border-yellow-500 hover:dark:border-white transition-all ease-in-out border-blue-500 dark:border-neutral-700 border-2 rounded-md p- flex flex-col gap-2 justify-center tems-center`}
         onClick={handleOnSelect}
       >
-        <FontAwesomeIcon icon="upload" size="2xl" />
+        <FontAwesomeIcon
+          icon="upload"
+          size="2xl"
+          color={`${darkMode ? "gray" : "black"}`}
+        />
       </div>
 
       <input

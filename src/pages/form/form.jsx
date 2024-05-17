@@ -15,9 +15,12 @@ import usePlaySound from "../../hooks/usePlaySound"
 
 import { InputForm } from "../../components"
 import UploadImage from "./UploadImage"
+import useAuth from "../../hooks/useAuth"
 
 function Form() {
-  const { createUserMutation } = useFirestore()
+  const { addEmployeeMutation } = useFirestore()
+  const { currentUser } = useAuth()
+
   const { playSuccess, playError } = usePlaySound()
   const [image, setImage] = useState("")
   const [croppedImage, setCroppedImage] = useState("")
@@ -39,10 +42,10 @@ function Form() {
 
   function onSubmit(data) {
     // send data
-    createUserMutation
+    addEmployeeMutation
       .mutateAsync({
-        data: data,
-        image: image,
+        data: { ...data, image },
+        uid: currentUser.uid,
       })
       .then(() => {
         playSuccess()

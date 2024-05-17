@@ -9,9 +9,11 @@ import { Image } from "../../components"
 import { LoadingSpinner } from "../../components"
 
 import GridActions from "./gridActions"
+import useAuth from "../../hooks/useAuth"
 
 const List = () => {
-  const { users, isLoading } = useFirestore()
+  const { uid } = useAuth()
+  const { users, isLoading } = useFirestore(uid)
   const { darkMode } = useTheme()
 
   const CustomNoRowsOverlay = () => {

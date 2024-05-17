@@ -1,16 +1,11 @@
 import { createContext, useState } from "react"
+import useLocalStorage from "../hooks/useLocalStorage"
 export const SoundContext = createContext(true)
 
 const SoundProvider = ({ children }) => {
-  const [isSoundAllowed, setIsSoundAllowed] = useState(() => {
-    const savedIsAllowedSounds = localStorage.getItem("sounds")
-    return savedIsAllowedSounds ? JSON.parse(savedIsAllowedSounds) : true
-  })
+  const [isSoundAllowed, setIsSoundAllowed] = useLocalStorage("sounds", true)
   const toggleSoundAllowed = () => {
-    setIsSoundAllowed((current) => {
-      localStorage.setItem("sounds", !isSoundAllowed)
-      return !current
-    })
+    setIsSoundAllowed(!isSoundAllowed)
   }
   return (
     <SoundContext.Provider value={{ isSoundAllowed, toggleSoundAllowed }}>

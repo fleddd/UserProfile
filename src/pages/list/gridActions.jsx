@@ -6,8 +6,10 @@ import usePlaySound from "../../hooks/usePlaySound"
 import useFirestore from "../../hooks/useFirestore"
 
 import { Image } from "../../components"
+import useAuth from "../../hooks/useAuth"
 
 const GridActions = ({ id }) => {
+  const { uid } = useAuth()
   const [deleteDialog, setDeleteDialog] = useState(false)
   const { deleteUserMutation } = useFirestore()
   const navigate = useNavigate()
@@ -20,7 +22,7 @@ const GridActions = ({ id }) => {
           className="hover:scale-90 transition-all ease-in-out "
           onClick={() =>
             deleteUserMutation
-              .mutateAsync({ id: id })
+              .mutateAsync({ id: id, uid: uid })
               .then(() => {
                 playSuccess()
                 toast.success("User was successfuly deleted!", {

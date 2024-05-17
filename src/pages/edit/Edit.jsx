@@ -6,18 +6,20 @@ import { motion } from "framer-motion"
 import { toast } from "react-toastify"
 import { formSchema } from "../../utils/formSchema"
 import fetchUserByID from "../../services/api"
-import useGetUserByID from "../../hooks/useGetUserByID"
+import useGetEmployeeByID from "../../hooks/useGetEmployeeByID"
 import useFirestore from "../../hooks/useFirestore"
 import usePlaySound from "../../hooks/usePlaySound"
 
 import { LoadingSpinner, InputForm, Button } from "../../components"
 
 import defaultAvatar from "../../assets/images/defaultLogo.png"
+import useAuth from "../../hooks/useAuth"
 
 const Edit = () => {
   const { id } = useParams()
+  const { uid } = useAuth()
 
-  const { user, isLoading } = useGetUserByID(id)
+  const { employee, isLoading } = useGetEmployeeByID()
   const { editUserMutation } = useFirestore()
   const [isEditable, setIsEditable] = useState(false)
   const { playSuccess, playError, playClick } = usePlaySound()
@@ -29,7 +31,7 @@ const Edit = () => {
     formState: { errors, isDirty },
   } = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: async () => fetchUserByID(id),
+    defaultValues: async () => fetchUserByID(uid, id).then((res) => res.data),
   })
 
   async function onSubmitSave(data) {
@@ -37,6 +39,7 @@ const Edit = () => {
       .mutateAsync({
         updatedData: data,
         id: id,
+        uid: uid,
       })
       .then(() => {
         playSuccess()
@@ -71,7 +74,7 @@ const Edit = () => {
             duration: 0.5,
           },
         }}
-        key={user?.id}
+        key={employee?.id}
         className={`border-2 border-blue-800 md:max-w-1300px flex flex-col justify-between text-black text-xl rounded-2xl p-5 shadow-md dark:border-neutral-700 dark:text-white`}
       >
         <form
@@ -84,11 +87,11 @@ const Edit = () => {
               htmlFor="avatarImage"
               className="text-blue-800 font-bold text-base dark:text-white"
             >
-              User image
+              Employee image
             </label>
             <img
               id="avatarImage"
-              src={user?.image || defaultAvatar}
+              src={employee?.image || defaultAvatar}
               width={150}
               height={150}
               className="rounded-md max-h-[300px] mb-[4px]"
@@ -182,7 +185,7 @@ const Edit = () => {
               />
             </div>
           </div>
-          <div className="flex items-start justify-center gap-3 text-center">
+          <div className="flex items-start justify-center space-x-2 text-center">
             <div className="flex gap-3">
               {isEditable ? (
                 <input

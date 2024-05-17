@@ -63,6 +63,12 @@ function Header() {
             >
               List
             </NavLink>
+            <NavLink
+              className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/profile" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
+              to={"/profile"}
+            >
+              Profile
+            </NavLink>
           </nav>
         </div>
       </div>

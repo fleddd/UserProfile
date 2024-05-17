@@ -2,9 +2,11 @@ import { motion } from "framer-motion"
 import useFirestore from "../../hooks/useFirestore"
 
 import { LoadingSpinner } from "../../components"
+import useAuth from "../../hooks/useAuth"
 
 const Dashboard = () => {
-  const { users, isLoading } = useFirestore()
+  const { currentUser, uid } = useAuth()
+  const { users, isLoading } = useFirestore(uid)
 
   // const workers = users.reduce((total, currentUsers) => currentUsers.role === 'Worker' ? total + 1 : total, 0)
   // const managers = users.reduce((total, currentUsers) => currentUsers.role === 'Manager' ? total + 1 : total, 0)
@@ -17,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <motion.main
+      <motion.div
         initial={{
           opacity: 0,
           y: -10,
@@ -64,7 +66,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </motion.main>
+      </motion.div>
     </>
   )
 }

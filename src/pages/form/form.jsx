@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { formSchema } from "../../utils/formSchema"
 import useFirestore from "../../hooks/useFirestore"
 import usePlaySound from "../../hooks/usePlaySound"
+import useNotification from "../../hooks/useNotification"
 
 import { InputForm } from "../../components"
 import UploadImage from "./UploadImage"
@@ -21,7 +22,7 @@ function Form() {
   const { addEmployeeMutation } = useFirestore()
   const { currentUser } = useAuth()
 
-  const { playSuccess, playError } = usePlaySound()
+  const { Success, Error } = useNotification()
   const [image, setImage] = useState("")
   const [croppedImage, setCroppedImage] = useState("")
   const {
@@ -48,16 +49,10 @@ function Form() {
         uid: currentUser.uid,
       })
       .then(() => {
-        playSuccess()
-        toast.success("User was successfuly added to the database!", {
-          position: "top-center",
-        })
+        Success("User was successfuly added to the database!")
       })
       .catch((error) => {
-        playError()
-        toast.error(`Some error occured here... ${error.message}`, {
-          position: "top-center",
-        })
+        Error(`Some error occured here... ${error.message}`)
         console.error(error)
       })
 

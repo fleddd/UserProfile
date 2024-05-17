@@ -13,8 +13,10 @@ import { auth } from "../firebase-config"
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getAuth,
+  updateEmail,
+  updatePassword,
 } from "firebase/auth"
-import useAuth from "../hooks/useAuth"
 
 export async function getAllUsers(uid) {
   const usersCollectionRef = collection(db, `users/${uid}/employees`)
@@ -73,4 +75,11 @@ export async function addEmployee({ uid, data }) {
   console.log(uid, data)
   const employeeCollectionRef = collection(db, `/users/${uid}/employees`)
   await addDoc(employeeCollectionRef, { data })
+}
+export async function updateUserData(email, password) {
+  if (!email) throw new Error("Invalid email!")
+  const auth = getAuth()
+  const user = auth.currentUser
+  await updateEmail(user, email)
+  if (password) await updatePassword(user, password)
 }

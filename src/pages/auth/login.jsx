@@ -5,9 +5,10 @@ import { InputForm, Button } from "../../components"
 import useAuth from "../../hooks/useAuth"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-
+import useNotification from "../../hooks/useNotification"
 const Login = () => {
   const { setCurrentUser, loginUserMutation } = useAuth()
+  const { Success, Error } = useNotification()
   const navigate = useNavigate()
 
   const {
@@ -29,13 +30,13 @@ const Login = () => {
         password: data.password,
       })
       .then(() => {
-        toast.success("Success!", { position: "top-center" })
+        Success("Success!")
         reset()
         navigate("/")
       })
       .catch((errors) => {
+        Error(`Something is wrong! ${errors.message}`)
         console.log(errors)
-        toast.error("Error!", { position: "top-center" })
       })
   }
 

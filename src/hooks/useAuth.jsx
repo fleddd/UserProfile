@@ -14,7 +14,6 @@ const useAuth = () => {
   const loginUserMutation = useMutation({
     mutationFn: loginUser,
   })
-
   const signOutUser = () => {
     signOut(auth)
     setCurrentUser(null)

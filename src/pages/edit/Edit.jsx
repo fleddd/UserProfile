@@ -8,7 +8,7 @@ import { formSchema } from "../../utils/formSchema"
 import fetchUserByID from "../../services/api"
 import useGetEmployeeByID from "../../hooks/useGetEmployeeByID"
 import useFirestore from "../../hooks/useFirestore"
-import usePlaySound from "../../hooks/usePlaySound"
+import useNotification from "../../hooks/useNotification"
 
 import { LoadingSpinner, InputForm, Button } from "../../components"
 
@@ -22,8 +22,7 @@ const Edit = () => {
   const { employee, isLoading } = useGetEmployeeByID()
   const { editUserMutation } = useFirestore()
   const [isEditable, setIsEditable] = useState(false)
-  const { playSuccess, playError, playClick } = usePlaySound()
-
+  const { Success, Error } = useNotification()
   const {
     register,
     handleSubmit,
@@ -42,16 +41,11 @@ const Edit = () => {
         uid: uid,
       })
       .then(() => {
-        playSuccess()
-        toast.success("Data was successfuly updated!", {
-          position: "top-center",
-          duration: 1000,
-        })
+        Success("Data was successfuly updated!")
         setIsEditable(false)
       })
       .catch((error) => {
-        playError()
-        toast.error("Data wasnt updated")
+        Error("Data wasnt updated")
         console.error(error)
       })
   }

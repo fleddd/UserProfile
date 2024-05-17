@@ -34,3 +34,14 @@ export const registerSchema = z
     path: ["confirmedPassword"],
     message: "Passwords don't match!",
   })
+
+export const profileSchema = z
+  .object({
+    email: z.string().max(50, "Email should be no longer than 50 symbols!"),
+    password: z.string(),
+    newEmail: z.string().max(50, "Email should be no longer than 50 symbols!"),
+  })
+  .refine((data) => data.confirmedPassword === data.password, {
+    path: ["newEmail"],
+    message: "Passwords don't match!",
+  })

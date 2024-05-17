@@ -6,17 +6,21 @@ import { Button, InputForm } from "../../components"
 import useAuth from "../../hooks/useAuth"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { updateUserData } from "../../services/api"
+import useNotification from "../../hooks/useNotification"
 
 const Profile = () => {
+  const { Success, Warn } = useNotification()
   const [isEditable, setIsEditable] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isConfirmedLogout, setIsConfirmedLogout] = useState(false)
-  const { currentUser, setCurrentUser, signOutUser } = useAuth()
+  const { currentUser, signOutUser } = useAuth()
   const navigate = useNavigate()
-  const { register, reset } = useForm({
+  const { register, reset, handleSubmit } = useForm({
     defaultValues: {
       email: currentUser === null ? "" : currentUser.email,
       password: "",
+      newEmail: "",
     },
   })
   const toggleIsEditable = () => {
@@ -24,6 +28,21 @@ const Profile = () => {
     if (isConfirmedLogout) setIsConfirmedLogout(false)
     reset()
   }
+
+  const onSubmit = (data) => {
+    if (data.newEmail === "" && data.password === "") {
+      return Warn("You have to put something here")
+    } else
+      updateUserData(data.newEmail, data.password)
+        .then(() => {
+          signOutUser()
+          Success("Success! Log in again!")
+        })
+        .catch((error) => {
+          console.log(error.message)
+        })
+  }
+
   return (
     <motion.div
       initial={{
@@ -39,32 +58,43 @@ const Profile = () => {
       }}
       className=" w-full h-full flex flex-col justify-center items-center gap-8"
     >
-      <div className="w-[350px] md:w-[500px] border-2 rounded-xl border-blue-700 dark:border-neutral-700 p-12 md:p-20 flex flex-col justify-center items-center gap-16">
+      <form
+        className="w-[350px] md:w-[500px] border-2 rounded-xl border-blue-700 dark:border-neutral-700 p-12 md:p-20 flex flex-col justify-center items-center gap-16"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div>
           <h2 className="text-3xl md:text-4xl dark:text-white font-bold">
             Your profile info:
           </h2>
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-7">
           <div className="flex flex-col gap-2">
             <h3 className="dark:text-white font-bold">Email:</h3>
-            <InputForm readOnly={!isEditable} {...register("email")} />
+            <InputForm readOnly={true} disabled={true} {...register("email")} />
             {currentUser !== null && !isEditable && (
               <>
-                <h3 className="dark:text-white ">Your user ID:</h3>
+                <h3 className="dark:text-white font-bold">Your user ID:</h3>
                 <p className="dark:text-white font-bold">{currentUser?.uid}</p>
               </>
             )}
           </div>
           {isEditable && (
             <div className="flex flex-col gap-2">
+              <h3 className="dark:text-white font-bold">New Email:</h3>
+              <InputForm
+                readOnly={!isEditable}
+                {...register("newEmail")}
+                type={"email"}
+                label="Enter new email..."
+              />
               <h3 className="dark:text-white font-bold">Password:</h3>
               <InputForm
                 readOnly={!isEditable}
                 {...register("password")}
                 type={`${isPasswordVisible ? "text" : "password"}`}
-                label="Optional"
+                label="Leave blank to keep the same"
               />
+
               <p
                 className="dark:text-neutral-400 font-bold cursor-pointer select-none"
                 onClick={() => setIsPasswordVisible((prev) => !prev)}
@@ -104,7 +134,7 @@ const Profile = () => {
             styles={`${isConfirmedLogout && "bg-red-600 dark:bg-red-950"}`}
           />
         </div>
-      </div>
+      </form>
     </motion.div>
   )
 }

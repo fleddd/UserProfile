@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "react-toastify"
-
+import useNotification from "../../hooks/useNotification"
 import usePlaySound from "../../hooks/usePlaySound"
 import useFirestore from "../../hooks/useFirestore"
 
@@ -13,7 +13,8 @@ const GridActions = ({ id }) => {
   const [deleteDialog, setDeleteDialog] = useState(false)
   const { deleteUserMutation } = useFirestore()
   const navigate = useNavigate()
-  const { playSuccess, playError, playClick } = usePlaySound()
+  const { playClick } = usePlaySound()
+  const { Success, Error } = useNotification()
 
   if (deleteDialog) {
     return (
@@ -24,16 +25,10 @@ const GridActions = ({ id }) => {
             deleteUserMutation
               .mutateAsync({ id: id, uid: uid })
               .then(() => {
-                playSuccess()
-                toast.success("User was successfuly deleted!", {
-                  position: "top-center",
-                })
+                Success("User was successfuly deleted!")
               })
               .catch((errors) => {
-                playError()
-                toast.warn(`Something went wrong... ${errors}`, {
-                  position: "top-center",
-                })
+                Error(`Something went wrong... ${errors}`)
                 console.error(errors)
               })
           }

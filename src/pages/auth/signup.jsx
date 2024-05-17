@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form"
 import { registerSchema } from "../../utils/formSchema"
 import { InputForm, Button } from "../../components"
 import useAuth from "../../hooks/useAuth"
-import { toast } from "react-toastify"
+import useNotification from "../../hooks/useNotification"
 const Signup = ({ setLoginMode }) => {
   const { signupUserMutation } = useAuth()
+  const { Success, Error } = useNotification()
 
   const {
     register,
@@ -30,13 +31,11 @@ const Signup = ({ setLoginMode }) => {
       .then(() => {
         reset()
         setLoginMode(true)
-        toast.success("Success! Now log into your new account!", {
-          position: "top-center",
-        })
+        Success("Success! Now log into your new account!")
       })
       .catch((error) => {
         console.log(error)
-        toast.error("error!", { position: "top-center" })
+        Error(error.code)
       })
   }
   return (

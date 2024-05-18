@@ -193,7 +193,9 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
                     </div>
                   ) : (
                     <div className="flex flex-col justify-center items-center">
-                      <p>Image Preview:</p>
+                      <p className="dark:text-white font-bold">
+                        Image Preview:
+                      </p>
                       <img width={150} height={150} src={croppedImage} alt="" />
                     </div>
                   )}

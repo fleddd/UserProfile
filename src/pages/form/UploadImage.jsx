@@ -105,7 +105,6 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
     const cropX = crop.x * scaleX
     const cropY = crop.y * scaleY
 
-    // Move the crop origin to the canvas origin (0,0)
     ctx.translate(-cropX, -cropY)
     ctx.drawImage(
       image,

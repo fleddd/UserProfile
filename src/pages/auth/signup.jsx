@@ -42,7 +42,8 @@ const Signup = ({ setLoginMode }) => {
     <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
       <InputForm
         label={"Login or email"}
-        {...register("email")        type="email"
+        {...register("email")}
+        type="email"
         errorMessage={errors.login?.message}
       />
       <InputForm

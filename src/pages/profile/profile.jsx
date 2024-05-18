@@ -70,7 +70,12 @@ const Profile = () => {
         <div className="flex flex-col gap-7">
           <div className="flex flex-col gap-2">
             <h3 className="dark:text-white font-bold">Email:</h3>
-            <InputForm readOnly={true} disabled={true} {...register("email")} />
+            <InputForm
+              type={"email"}
+              readOnly={true}
+              disabled={true}
+              {...register("email")}
+            />
             {currentUser !== null && !isEditable && (
               <>
                 <h3 className="dark:text-white font-bold">Your user ID:</h3>

@@ -138,7 +138,7 @@ const UploadImage = ({ image, setImage, croppedImage, setCroppedImage }) => {
         ref={imagePicker}
         id="avatar"
         type="file"
-        accept=".png,.jpeg"
+        accept=".png,.jpeg, .heif"
         onChange={onChangeImage}
         className="hidden"
       />

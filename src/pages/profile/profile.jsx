@@ -8,6 +8,8 @@ import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import { updateUserData } from "../../services/api"
 import useNotification from "../../hooks/useNotification"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { profileSchema } from "../../utils/formSchema"
 
 const Profile = () => {
   const { Success, Warn } = useNotification()
@@ -16,12 +18,18 @@ const Profile = () => {
   const [isConfirmedLogout, setIsConfirmedLogout] = useState(false)
   const { currentUser, signOutUser, isUserLoggedIn } = useAuth()
   const navigate = useNavigate()
-  const { register, reset, handleSubmit } = useForm({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       email: currentUser === null ? "Log into account!" : currentUser.email,
       password: "",
       newEmail: "",
     },
+    resolver: zodResolver(profileSchema),
   })
   const toggleIsEditable = () => {
     setIsEditable((prev) => !prev)
@@ -88,6 +96,7 @@ const Profile = () => {
             <div className="flex flex-col gap-2">
               <h3 className="dark:text-white font-bold">New Email:</h3>
               <InputForm
+                errorMessage={errors?.newEmail?.message}
                 readOnly={!isEditable}
                 {...register("newEmail")}
                 type={"email"}
@@ -95,6 +104,7 @@ const Profile = () => {
               />
               <h3 className="dark:text-white font-bold">Password:</h3>
               <InputForm
+                errorMessage={errors?.password?.message}
                 readOnly={!isEditable}
                 {...register("password")}
                 type={`${isPasswordVisible ? "text" : "password"}`}

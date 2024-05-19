@@ -5,15 +5,12 @@
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import "react-image-crop/dist/ReactCrop.css"
-import { toast } from "react-toastify"
 import { motion } from "framer-motion"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { formSchema } from "../../utils/formSchema"
 import useFirestore from "../../hooks/useFirestore"
-import usePlaySound from "../../hooks/usePlaySound"
 import useNotification from "../../hooks/useNotification"
-
 import { InputForm } from "../../components"
 import UploadImage from "./UploadImage"
 import useAuth from "../../hooks/useAuth"

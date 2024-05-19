@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate()
   useEffect(() => {
     if (currentUser === null) {
-      navigate("/auth", { replace: true })
+      navigate("/UserProfile/auth", { replace: true })
     }
   }, [currentUser, isUserLoggedIn, navigate])
 

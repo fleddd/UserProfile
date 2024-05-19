@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom"
 import { motion } from "framer-motion"
+import useAuth from "../../hooks/useAuth"
 
 const HeaderModal = ({ closeModal }) => {
+  const { isUserLoggedIn } = useAuth()
   return (
     <motion.div
       animate={{
@@ -22,33 +24,37 @@ const HeaderModal = ({ closeModal }) => {
         }}
         className="flex h-full flex-col gap-4 justify-center items-center"
       >
-        <NavLink
-          onClick={closeModal}
-          className={
-            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
-          }
-          to={"/UserProfile/dashboard"}
-        >
-          Dashboard
-        </NavLink>
-        <NavLink
-          onClick={closeModal}
-          className={
-            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
-          }
-          to={"/UserProfile/form"}
-        >
-          Add user
-        </NavLink>
-        <NavLink
-          onClick={closeModal}
-          className={
-            "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
-          }
-          to={"/UserProfile/list"}
-        >
-          List
-        </NavLink>
+        {isUserLoggedIn && (
+          <>
+            <NavLink
+              onClick={closeModal}
+              className={
+                "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+              }
+              to={"/UserProfile/dashboard"}
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              onClick={closeModal}
+              className={
+                "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+              }
+              to={"/UserProfile/form"}
+            >
+              Add user
+            </NavLink>
+            <NavLink
+              onClick={closeModal}
+              className={
+                "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+              }
+              to={"/UserProfile/list"}
+            >
+              List
+            </NavLink>
+          </>
+        )}
         <NavLink
           onClick={closeModal}
           className={
@@ -58,6 +64,17 @@ const HeaderModal = ({ closeModal }) => {
         >
           Profile
         </NavLink>
+        {!isUserLoggedIn && (
+          <NavLink
+            onClick={closeModal}
+            className={
+              "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
+            }
+            to={"/UserProfile/"}
+          >
+            Home
+          </NavLink>
+        )}
       </motion.div>
     </motion.div>
   )

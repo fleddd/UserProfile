@@ -212,7 +212,7 @@ const Edit = () => {
             </div>
 
             <div className={`${isEditable && "hidden"} flex gap-3 flex-wrap`}>
-              <Link to={"/list"}>
+              <Link to={"/UserProfile/list"}>
                 <Button text={"Back"} onClick={() => playClick()} />
               </Link>
             </div>

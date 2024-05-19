@@ -54,7 +54,7 @@ const GridActions = ({ id }) => {
         className="hover:scale-90 transition-all ease-in-out "
         onClick={() => {
           playClick()
-          navigate(`/list/${id}`)
+          navigate(`/UserProfile/list/${id}`)
         }}
       >
         <Image.View width={30} height={30} />

@@ -1,5 +1,14 @@
 import { createBrowserRouter } from "react-router-dom"
-import { Edit, List, Form, Dashboard, NotFound, Profile, Auth } from "../pages"
+import {
+  Edit,
+  List,
+  Form,
+  Dashboard,
+  NotFound,
+  Profile,
+  Auth,
+  Home,
+} from "../pages"
 import ProtectedRoute from "./ProtectedRoute"
 import Layout from "../template/Layout.jsx"
 
@@ -8,6 +17,10 @@ export const routesList = createBrowserRouter([
     path: "/UserProfile/",
     element: <Layout />,
     children: [
+      {
+        path: "",
+        element: <Home />,
+      },
       {
         path: "dashboard",
         element: (
@@ -42,11 +55,7 @@ export const routesList = createBrowserRouter([
       },
       {
         path: "profile",
-        element: (
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
-        ),
+        element: <Profile />,
       },
       {
         path: "auth",

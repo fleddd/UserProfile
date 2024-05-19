@@ -14,11 +14,11 @@ const Profile = () => {
   const [isEditable, setIsEditable] = useState(false)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isConfirmedLogout, setIsConfirmedLogout] = useState(false)
-  const { currentUser, signOutUser } = useAuth()
+  const { currentUser, signOutUser, isUserLoggedIn } = useAuth()
   const navigate = useNavigate()
   const { register, reset, handleSubmit } = useForm({
     defaultValues: {
-      email: currentUser === null ? "" : currentUser.email,
+      email: currentUser === null ? "Log into account!" : currentUser.email,
       password: "",
       newEmail: "",
     },
@@ -30,6 +30,7 @@ const Profile = () => {
   }
 
   const onSubmit = (data) => {
+    if (data.email === "") return Warn("You have to be authorized!")
     if (data.newEmail === "" && data.password === "") {
       return Warn("You have to put something here")
     } else
@@ -109,36 +110,43 @@ const Profile = () => {
             </div>
           )}
         </div>
-
-        <div className="space-x-2 text-center space-y-2">
-          {isEditable && (
+        {isUserLoggedIn && (
+          <div className="space-x-2 text-center space-y-2">
+            {isEditable && (
+              <Button
+                disabled={!isEditable}
+                type="submit"
+                styles={`dark:bg-green-900 bg-green-600`}
+                text={"Save"}
+              />
+            )}
             <Button
-              disabled={!isEditable}
-              type="submit"
-              styles={`dark:bg-green-900 bg-green-600`}
-              text={"Save"}
+              text={`${isEditable ? "Back" : "Update credentials"}`}
+              onClick={toggleIsEditable}
             />
-          )}
+            <Button
+              text={`${isConfirmedLogout ? "You sure?" : "Logout"}`}
+              onClick={() => {
+                if (isEditable) setIsEditable(false)
+                if (isConfirmedLogout) {
+                  signOutUser()
+                  navigate("/UserProfile/auth")
+                  toast.warn("You logged out!", {
+                    position: "top-center",
+                  })
+                } // put here function of loggin out
+                setIsConfirmedLogout((prev) => !prev)
+              }}
+              styles={`${isConfirmedLogout && "bg-red-600 dark:bg-red-950"}`}
+            />
+          </div>
+        )}
+        {!isUserLoggedIn && (
           <Button
-            text={`${isEditable ? "Back" : "Update credentials"}`}
-            onClick={toggleIsEditable}
+            text={"Log in!"}
+            onClick={() => navigate("/UserProfile/auth")}
           />
-          <Button
-            text={`${isConfirmedLogout ? "You sure?" : "Logout"}`}
-            onClick={() => {
-              if (isEditable) setIsEditable(false)
-              if (isConfirmedLogout) {
-                signOutUser()
-                navigate("/auth")
-                toast.warn("You logged out!", {
-                  position: "top-center",
-                })
-              } // put here function of loggin out
-              setIsConfirmedLogout((prev) => !prev)
-            }}
-            styles={`${isConfirmedLogout && "bg-red-600 dark:bg-red-950"}`}
-          />
-        </div>
+        )}
       </form>
     </motion.div>
   )

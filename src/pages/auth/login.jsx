@@ -32,7 +32,7 @@ const Login = () => {
       .then(() => {
         Success("Success!")
         reset()
-        navigate("/")
+        navigate("/UserProfile/dashboard")
       })
       .catch((errors) => {
         Error(`Something is wrong! ${errors.message}`)

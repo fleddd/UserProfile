@@ -14,6 +14,7 @@ import { LoadingSpinner, InputForm, Button } from "../../components"
 
 import defaultAvatar from "../../assets/images/defaultLogo.png"
 import useAuth from "../../hooks/useAuth"
+import usePlaySound from "../../hooks/usePlaySound"
 
 const Edit = () => {
   const { id } = useParams()
@@ -23,6 +24,8 @@ const Edit = () => {
   const { editUserMutation } = useFirestore()
   const [isEditable, setIsEditable] = useState(false)
   const { Success, Error } = useNotification()
+  const { playClick } = usePlaySound()
+
   const {
     register,
     handleSubmit,

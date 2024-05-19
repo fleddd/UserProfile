@@ -28,10 +28,10 @@ const Home = () => {
               </h2>
             </div>
             <div>
-              <p className="w-9/12">
+              <p className="w-9/12 dark:text-white ">
                 Organization of employee database, control of team performance —
                 all in one{" "}
-                <span className="border-b-[1px] border-black font-bold">
+                <span className="border-b-[1px] border-blue-500 text-blue-400 font-bold">
                   CRM system.
                 </span>
               </p>
@@ -61,9 +61,9 @@ const Home = () => {
               </h3>
             </div>
             <div>
-              <p className="w-9/12">
+              <p className="w-9/12 dark:text-white ">
                 You can add, delete, edit employees and put all nesseccary{" "}
-                <span className="border-b-[1px] border-black font-bold">
+                <span className="border-b-[1px] border-black dark:border-blue-400 font-bold text-blue-400 ">
                   data.
                 </span>
               </p>

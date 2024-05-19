@@ -5,11 +5,11 @@ import Layout from "../template/Layout.jsx"
 
 export const routesList = createBrowserRouter([
   {
-    path: "/",
+    path: "/UserProfile/",
     element: <Layout />,
     children: [
       {
-        path: "",
+        path: "dashboard",
         element: (
           <ProtectedRoute>
             <Dashboard />

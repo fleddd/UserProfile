@@ -47,25 +47,25 @@ function Header() {
           <nav className="hidden h-full sm:flex justify-center gap-3 items-center sm:text-md md:text-xl font-bold">
             <NavLink
               className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
-              to={"/"}
+              to={"/UserProfile/dashboard"}
             >
               Dashboard
             </NavLink>
             <NavLink
               className={` transition-allease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/form" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
-              to={"/form"}
+              to={"/UserProfile/form"}
             >
               Add
             </NavLink>
             <NavLink
               className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/list" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
-              to={"/list"}
+              to={"/UserProfile/list"}
             >
               List
             </NavLink>
             <NavLink
               className={` transition-all ease px-4 py-2 rounded-xl hover:translate-y-[-2px] ${routerPath.pathname === "/profile" ? "border-2 bg-blue-500 text-white dark:bg-transparent dark:text-white dark:border-2" : "text bg-white text-blue-500 dark:text-neutral-900"}`}
-              to={"/profile"}
+              to={"/UserProfile/profile"}
             >
               Profile
             </NavLink>

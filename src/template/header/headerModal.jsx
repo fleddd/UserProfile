@@ -27,7 +27,7 @@ const HeaderModal = ({ closeModal }) => {
           className={
             "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
-          to={"/"}
+          to={"/UserProfile/dashboard"}
         >
           Dashboard
         </NavLink>
@@ -36,7 +36,7 @@ const HeaderModal = ({ closeModal }) => {
           className={
             "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
-          to={"/form"}
+          to={"/UserProfile/form"}
         >
           Add user
         </NavLink>
@@ -45,7 +45,7 @@ const HeaderModal = ({ closeModal }) => {
           className={
             "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
-          to={"/list"}
+          to={"/UserProfile/list"}
         >
           List
         </NavLink>
@@ -54,7 +54,7 @@ const HeaderModal = ({ closeModal }) => {
           className={
             "bg-white dark:bg-neutral-900 text-4xl font-bold p-2 text-blue-500 dark:text-white border-2 border-blue-500 dark:border-neutral-800 rounded-xl hover:bg-blue-500 hover:text-white transition-all ease-in-out"
           }
-          to={"/profile"}
+          to={"/UserProfile/profile"}
         >
           Profile
         </NavLink>

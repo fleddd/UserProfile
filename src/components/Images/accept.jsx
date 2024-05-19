@@ -1,11 +1,11 @@
-const Accept = () => {
+const Accept = ({ size = 30 }) => {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 448 512"
-        width={30}
-        height={30}
+        width={size}
+        height={size}
         fill="green"
         className="cursor-pointer"
       >
